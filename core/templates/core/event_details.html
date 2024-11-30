@@ -4,6 +4,10 @@
 <a href="{% url 'add-guest' event.id %}">add guest</a>
 <ul>
     {% for guest in guests %}
-    <li>{{ guest }}</li>
+    <li>
+        {{ guest }} 
+        <!-- <a href="{% url 'delete-guest' guest.id %}">delete</a> -->
+
+    </li>
     {% endfor %}
 </ul>

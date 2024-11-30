@@ -1,0 +1,7 @@
+<h1>Delete Guest</h1>
+<p>Are you sure you want to delete {{ guest.name }}?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="{% url 'event_detail' guest.event.id %}" class="btn btn-secondary">Cancel</a>
+</form>

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login
-from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseForbidden
 from .models import Venue, Guest, Wedding
 from .forms import CustomUserCreationForm,VenueForm, GuestForm, WeddingForm, GuestUpdateForm, WeddingUpdateForm
 
@@ -59,6 +60,20 @@ def delete_event(request, event_id):
         return redirect('user-events')
     return redirect('user-events')
 
+@login_required
+def delete_guest(request, guest_id):
+    # Fetch the guest object by ID
+    guest = get_object_or_404(Guest, pk=guest_id)
+    event = guest.objects.filter(event__created_by=request.user)
+    # Ensure only the creator of the event or admin can delete a guest
+    if request.user != event.created_by and not request.user.is_superuser:
+        return HttpResponseForbidden("You do not have permission to delete this guest.")
+
+    if request.method == 'POST':
+        guest.delete()
+        return redirect('event_detail', event_id=event.id)  # Redirect to event details
+
+    return render(request, 'core/delete_guest_confirm.html', {'guest': guest})
 
 def index(request):
     events = Wedding.objects.all()
