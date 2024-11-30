@@ -13,7 +13,7 @@ Event Creation: Create events with detailed information, including date, time, v
 
 1. Clone the Repository:
 ```sh
-git clone https://github.com/your-username/wedding-platform.git
+git clone https://github.com/Isaiah-Ambi/Django-wedding-event-management.git
 ```
 
 2. Set Up Virtual Environment:
