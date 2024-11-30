@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+
+{% for event in events %}
+
+    {{ event.title }}
+    <div>
+    {% for guest in guests %}
+
+        <div>
+           <p> name:{{ guest.name }} </p>
+            <p> status: {{ guest.status }} </p>
+        </div>
+
+        <a href="{% url 'update-guest' guest.id %}">update</a>
+        
+        <div id="message"></div>
+    {% endfor %}
+{% endfor %}
+
+</div>
+
+{% endblock %}

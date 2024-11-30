@@ -1,0 +1,10 @@
+{% block title %} venues {% endblock %}
+
+{% block content %}
+<ul>
+    {% for venue in venues %}
+    <li>{{ venue.name }}</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

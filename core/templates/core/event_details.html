@@ -1,0 +1,9 @@
+<h1>{{ event.title }}</h1>
+
+<h3>guests</h3>
+<a href="{% url 'add-guest' event.id %}">add guest</a>
+<ul>
+    {% for guest in guests %}
+    <li>{{ guest }}</li>
+    {% endfor %}
+</ul>
